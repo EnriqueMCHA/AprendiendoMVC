@@ -1,17 +1,24 @@
 <?php
 
-require_once 'controllers/error.php';
+require_once 'controllers/errores.php';
 
 class App{
 
     function __construct(){
-        echo '<p>estoy en app</p>';
+        //echo '<p>estoy en app</p>';
 
-        $url = $_GET['url'];
+        $url = (isset($_GET['url'])) ? $_GET['url'] : null;
         $url = rtrim($url,'/');
         $url = explode('/',$url);
 
-        
+        //Validamos que si no se está enviando nada por la url, lo redirija al main
+        if(empty($url[0])){
+
+            $archivoController = 'controllers/main.php';
+            require_once $archivoController;
+            $controller = new Main();
+            return false;
+        }
 
         // echo '<pre>';
         // var_dump($url);
@@ -19,16 +26,16 @@ class App{
 
         $archivoController = 'controllers/' . $url[0] . '.php';
 
+        //Validamos que el controlador exista, caso contrario llamamos al error
         if(file_exists($archivoController)){
             require_once $archivoController;
             $controller = new $url[0];
 
             if(isset($url[1])){
                 $controller->{$url[1]}();
-            }
-
+            } 
         } else{
-            $controller = new Errorr();
+            $controller = new Errores();
         }
         
     }

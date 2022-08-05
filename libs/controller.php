@@ -6,7 +6,7 @@ class Controller{
 
     function __construct(){
         
-        echo '<p>Controlador principal</p>';
+        //echo '<p>Controlador principal</p>';
         $this->view = new View();
     }
 

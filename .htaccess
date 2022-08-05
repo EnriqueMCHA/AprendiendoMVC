@@ -1,2 +1,8 @@
 RewriteEngine On
+
+#Condiciones para permitir ciertos archivos (CSS, JS, etc...) [supongo xd]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
 RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
