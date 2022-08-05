@@ -41,7 +41,34 @@ main{
 
 main h1{
     text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
+
+main div{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+main div label{
+    font-size: larger;
+    margin: auto;
+}
+
+main div input[type="text"]{
+    height: 40px;
+    width: 70%;
+    font-size: larger;
+}
+
+main div input[type="submit"]{
+    height: 50px;
+    width: 100%;
+    font-size: larger;
+    cursor: pointer;
+}
+
 
 .error{
     color: #f34949;
