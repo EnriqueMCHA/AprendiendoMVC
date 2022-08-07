@@ -10,9 +10,19 @@ class Nuevo extends Controller{
 
     function registrarPelicula(){
 
-        echo 'Alumno creado';
-        $this->model->insert();
+        //Para validar los datos hacerlo en el controller para que el model solo reciba la info ya procesada
 
+        $datos = array(
+
+            'nombre' => $_POST['nombre'],
+            'genero' => $_POST['genero'],
+            'calidad' => $_POST['calidad']
+        );
+
+        if($this->model->insert($datos)){
+            echo 'Película agregada exitosamente!';
+        }
+        
 
     }
 

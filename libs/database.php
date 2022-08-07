@@ -10,7 +10,7 @@ class Database{
 
     public function __construct(){
         
-        $this->host = constant('URL');
+        $this->host = constant('HOST');
         $this->db = constant('DB');
         $this->user = constant('USER');
         $this->password = constant('PASSWORD');
