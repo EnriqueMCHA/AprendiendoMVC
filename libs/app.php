@@ -18,6 +18,7 @@ class App{
             require_once $archivoController;
             $controller = new Main();
             $controller->loadModel('main');
+            $controller->render();
             return false;
         }
 
@@ -29,13 +30,19 @@ class App{
 
         //Validamos que el controlador exista, caso contrario llamamos al error
         if(file_exists($archivoController)){
+
             require_once $archivoController;
             $controller = new $url[0];
             $controller->loadModel($url[0]);
+            //$controller->render(); Esto funciona perfactamente pero el men no lo coloco aquí
 
+            //Validamos que se esté enviando un metodo
             if(isset($url[1])){
                 $controller->{$url[1]}();
-            } 
+            } else{
+                $controller->render();
+            }
+
         } else{
             $controller = new Errores();
         }

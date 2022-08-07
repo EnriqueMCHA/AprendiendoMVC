@@ -4,10 +4,16 @@ class Consulta extends Controller{
 
     function __construct(){
         parent::__construct();
-        $this->view->mensaje = 'Esta vista será para las consultas 👀';
-        $this->view->render('consulta/index');
+        $this->view->peliculas = [];
+        $this->view->mensaje = '';
     }
 
+    function render(){
+        $peliculas = $this->model->get();
+        $this->view->peliculas = $peliculas;
+
+        $this->view->render('consulta/index');
+    }
 
 }
 

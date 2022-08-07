@@ -4,7 +4,11 @@ class Nuevo extends Controller{
 
     function __construct(){
         parent::__construct();
-        $this->view->mensaje = 'Esta vista será para cualquier cosa idk 😬';
+        $this->view->mensaje = '';
+        $this->view->error = false;
+    }
+
+    function render(){
         $this->view->render('nuevo/index');
     }
 
@@ -19,14 +23,28 @@ class Nuevo extends Controller{
             'calidad' => $_POST['calidad']
         );
 
-        if($this->model->insert($datos)){
-            echo 'Película agregada exitosamente!';
+        if (!empty($datos['nombre'])) {
+
+            if ($this->model->insert($datos)) {
+
+                $mensaje = 'Película agregada exitosamente! 😁✔';
+                $error = false;
+            } else {
+
+                $mensaje = 'La película ingresada ya existe 😡❌';
+                $error = true;
+            }
+
+            $this->view->mensaje = $mensaje;
+            $this->view->error = $error;
+            $this->render();
+        } else{
+
+            $this->view->mensaje = 'El campo de la película no puede ir vacio 🙄';
+            $this->view->error = true;
+            $this->render();
         }
-        
-
     }
-
 }
-
 
 ?>

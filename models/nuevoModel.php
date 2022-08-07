@@ -21,7 +21,7 @@ class NuevoModel extends Model{
             	
             //Error 1062 sql duplicate entry
             if($error->errorInfo[1] == 1062){
-                echo 'La pelicula ingresada ya existe';
+                //echo 'La pelicula ingresada ya existe';
             }
             return false;
         }

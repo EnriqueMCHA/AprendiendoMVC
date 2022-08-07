@@ -13,6 +13,16 @@
     <main>
         <h1>Registrar Película 🤡</h1>
 
+        <?php if ($this->error == true) { ?>
+
+            <h4 class="error"><?php echo $this->mensaje; ?></h4>
+
+        <?php } else { ?>
+
+            <h4 class="sucess"><?php echo $this->mensaje; ?></h4>
+
+        <?php } ?>
+
         <form action="<?php echo constant('URL'); ?>nuevo/registrarPelicula" method="post">
             <div>
                 <label for="nombre">Nombre:</label><br>
