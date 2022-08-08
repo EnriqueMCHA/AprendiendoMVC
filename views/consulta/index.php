@@ -35,16 +35,14 @@
                         <td><?php echo $pelicula->nombre; ?></td>
                         <td><?php echo $pelicula->genero; ?></td>
                         <td><?php echo $pelicula->calidad; ?></td>
-                        <td><a href="#" class="accion">Editar</a></td>
-                        <td><a href="#" class="accion">Eliminar</a></td>
+                        <td><a href="<?php echo constant('URL') . 'consulta/verPelicula/' . $pelicula->id ?>" class="accion">Editar</a></td>
+                        <td><a href="<?php echo constant('URL') . 'consulta/eliminarPelicula/' . $pelicula->id ?>" class="accion">Eliminar</a></td>
                     </tr>
 
                 <?php } ?>
-
+                
             </tbody>
         </table>
-
-
     </main>
 
     <?php require 'views/footer.php' ?>

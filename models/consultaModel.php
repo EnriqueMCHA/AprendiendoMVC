@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once 'models/pelicula.php';
 
@@ -9,20 +9,21 @@ class ConsultaModel extends Model{
     }
 
     public function get(){
-        
+
         $peliculas = [];
 
         try {
             $consulta = $this->db->conexion()->query('SELECT * FROM peliculas');
 
-            while($columna = $consulta->fetch()){
-                
+            while ($columna = $consulta->fetch()) {
+
                 $pelicula = new Pelicula();
+                $pelicula->id = $columna['pelicula_id'];
                 $pelicula->nombre = $columna['nombre'];
                 $pelicula->genero = $columna['genero'];
                 $pelicula->calidad = $columna['calidad'];
 
-                array_push($peliculas,$pelicula);
+                array_push($peliculas, $pelicula);
             }
 
             //Evaluar diferencia con el foreach al terminar
@@ -32,13 +33,55 @@ class ConsultaModel extends Model{
             // }
 
             return $peliculas;
-
         } catch (PDOException $error) {
             return [];
         }
     }
 
-}
+    public function getById($id){
 
+        $pelicula = new Pelicula();
+
+        $consulta = $this->db->conexion()->prepare("SELECT * FROM peliculas WHERE pelicula_id = :id");
+
+        try {
+
+            $consulta->execute(['id' => $id]);
+
+            while ($columna = $consulta->fetch()) {
+
+                $pelicula->id = $columna['pelicula_id'];
+                $pelicula->nombre = $columna['nombre'];
+                $pelicula->genero = $columna['genero'];
+                $pelicula->calidad = $columna['calidad'];
+            }
+
+            return $pelicula;
+        } catch (PDOException $error) {
+
+            return [];
+        }
+    }
+
+    public function update($datos){
+
+        $consulta = $this->db->conexion()->prepare("UPDATE peliculas SET genero = :genero, calidad = :calidad WHERE pelicula_id = :pelicula_id");
+
+        try {
+
+            $consulta->execute([
+                'genero' => $datos['genero'],
+                'calidad' => $datos['calidad'],
+                'pelicula_id' => $datos['pelicula_id']
+            ]);
+
+            return true;
+            
+        } catch (PDOException $error) {
+
+            return false;
+        }
+    }
+}
 
 ?>
