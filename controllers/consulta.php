@@ -52,11 +52,11 @@ class Consulta extends Controller{
             $pelicula->genero = $datos['genero'];
             $pelicula->calidad = $datos['calidad'];
 
-            $mensaje = 'Película actualizada correctamente ';
+            $mensaje = 'Película actualizada correctamente! ✔';
             $error = false;
         } else{
 
-            $mensaje = "No fue posible la actualización de la película";
+            $mensaje = "No fue posible la actualización de la película ❌";
             $error = true;
         }
 
@@ -66,8 +66,31 @@ class Consulta extends Controller{
         $this->view->render('consulta/verDetalles');
     }
 
-    function eliminarPelicula(){
+    function eliminarPelicula($id = null){
 
+        $idPelicula = $id[0];
+
+        if($this->model->delete($idPelicula)){
+
+            $mensaje = 'Película eliminada correctamente! ✔';
+            $ok = true;
+
+        } else{
+
+            $mensaje = "No fue posible la eliminación de la película ❌";
+            $ok = false;
+        }
+
+        // $this->view->mensaje = $mensaje;
+        // $this->view->error = $error;
+        // $this->render();
+
+        $json = array(
+
+            'mensaje' => $mensaje,
+            'ok' => $ok
+        );
+        echo json_encode($json);
     }
 }
 

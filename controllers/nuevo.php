@@ -27,11 +27,11 @@ class Nuevo extends Controller{
 
             if ($this->model->insert($datos)) {
 
-                $mensaje = 'Película agregada exitosamente! 😁✔';
+                $mensaje = 'Película agregada exitosamente! ✔';
                 $error = false;
             } else {
 
-                $mensaje = 'La película ingresada ya existe 😡❌';
+                $mensaje = 'La película ingresada ya existe ❌';
                 $error = true;
             }
 

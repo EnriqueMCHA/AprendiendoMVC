@@ -15,25 +15,34 @@ class ConsultaModel extends Model{
         try {
             $consulta = $this->db->conexion()->query('SELECT * FROM peliculas');
 
-            while ($columna = $consulta->fetch()) {
+            // while ($columna = $consulta->fetch()) {
+
+                // $pelicula = new Pelicula();
+                // $pelicula->id = $columna['pelicula_id'];
+                // $pelicula->nombre = $columna['nombre'];
+                // $pelicula->genero = $columna['genero'];
+                // $pelicula->calidad = $columna['calidad'];
+
+            //     array_push($peliculas, $pelicula);
+            // }
+
+            //Evaluar diferencia con el foreach al terminar
+
+            foreach ($consulta as $llave) {
 
                 $pelicula = new Pelicula();
-                $pelicula->id = $columna['pelicula_id'];
-                $pelicula->nombre = $columna['nombre'];
-                $pelicula->genero = $columna['genero'];
-                $pelicula->calidad = $columna['calidad'];
+                $pelicula->id = $llave['pelicula_id'];
+                $pelicula->nombre = $llave['nombre'];
+                $pelicula->genero = $llave['genero'];
+                $pelicula->calidad = $llave['calidad'];
 
                 array_push($peliculas, $pelicula);
             }
 
-            //Evaluar diferencia con el foreach al terminar
-
-            // foreach ($consulta as $llave) {
-            //      $peliculas[] = $llave;
-            // }
-
             return $peliculas;
+
         } catch (PDOException $error) {
+
             return [];
         }
     }
@@ -48,15 +57,24 @@ class ConsultaModel extends Model{
 
             $consulta->execute(['id' => $id]);
 
-            while ($columna = $consulta->fetch()) {
+            // while ($columna = $consulta->fetch()) {
 
-                $pelicula->id = $columna['pelicula_id'];
-                $pelicula->nombre = $columna['nombre'];
-                $pelicula->genero = $columna['genero'];
-                $pelicula->calidad = $columna['calidad'];
+            //     $pelicula->id = $columna['pelicula_id'];
+            //     $pelicula->nombre = $columna['nombre'];
+            //     $pelicula->genero = $columna['genero'];
+            //     $pelicula->calidad = $columna['calidad'];
+            // }
+
+            foreach($consulta as $llave){
+
+                $pelicula->id = $llave['pelicula_id'];
+                $pelicula->nombre = $llave['nombre'];
+                $pelicula->genero = $llave['genero'];
+                $pelicula->calidad = $llave['calidad'];
             }
 
             return $pelicula;
+
         } catch (PDOException $error) {
 
             return [];
@@ -76,7 +94,23 @@ class ConsultaModel extends Model{
             ]);
 
             return true;
-            
+
+        } catch (PDOException $error) {
+
+            return false;
+        }
+    }
+
+    public function delete($id){
+
+        $consulta = $this->db->conexion()->prepare("DELETE FROM peliculas WHERE pelicula_id = :id");
+
+        try {
+
+            $consulta->execute(['id' => $id]);
+
+            return true;
+
         } catch (PDOException $error) {
 
             return false;

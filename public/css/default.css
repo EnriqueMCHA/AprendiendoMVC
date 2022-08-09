@@ -105,6 +105,17 @@ a{
     text-align: center;
 }
 
+.btnEliminar{
+    padding: 5px 20px;
+    text-decoration: none;
+    background: #F999B7;
+    color: #000;
+    border-radius: 15px 50px;
+    border: none;
+    cursor: pointer;
+    font-size: medium;
+}
+
 .accion{
     text-align: center;
     margin-left: auto;
@@ -115,6 +126,6 @@ a{
     color: #f34949;
 }
 
-.sucess {
+.success {
     color: #00ff33;
 }

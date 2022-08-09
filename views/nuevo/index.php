@@ -19,7 +19,7 @@
 
         <?php } else { ?>
 
-            <h4 class="sucess"><?php echo $this->mensaje; ?></h4>
+            <h4 class="success"><?php echo $this->mensaje; ?></h4>
 
         <?php } ?>
 
