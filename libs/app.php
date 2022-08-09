@@ -8,11 +8,11 @@ class App{
         //echo '<p>estoy en app</p>';
 
         $url = (isset($_GET['url'])) ? $_GET['url'] : null;
-        $url = rtrim($url,'/');
-        $url = explode('/',$url);
+        $url = rtrim($url, '/');
+        $url = explode('/', $url);
 
         //Validamos que si no se está enviando nada por la url, lo redirija al main
-        if(empty($url[0])){
+        if (empty($url[0])) {
 
             $archivoController = 'controllers/main.php';
             require_once $archivoController;
@@ -29,7 +29,7 @@ class App{
         $archivoController = 'controllers/' . $url[0] . '.php';
 
         //Validamos que el controlador exista, caso contrario llamamos al error
-        if(file_exists($archivoController)){
+        if (file_exists($archivoController)) {
 
             require_once $archivoController;
             $controller = new $url[0];
@@ -38,25 +38,25 @@ class App{
 
             $nParametros = sizeof($url);
 
-             // //Validamos que se esté enviando un metodo aparte si se están enviando parametros
+            // //Validamos que se esté enviando un metodo aparte si se están enviando parametros
 
-            if($nParametros > 1){
+            if ($nParametros > 1) {
 
-                if($nParametros > 2){
+                if ($nParametros > 2) {
 
                     $parametros = [];
 
-                    for($i = 2; $i < $nParametros; $i++){
+                    for ($i = 2; $i < $nParametros; $i++) {
 
                         array_push($parametros, $url[$i]);
                     }
 
                     $controller->{$url[1]}($parametros);
-                }else{
+                } else {
 
                     $controller->{$url[1]}();
                 }
-            } else{
+            } else {
                 $controller->render();
             }
 
@@ -67,14 +67,8 @@ class App{
             //     $controller->render();
             // }
 
-        } else{
+        } else {
             $controller = new Errores();
         }
-        
     }
-
-
 }
-
-
-?>

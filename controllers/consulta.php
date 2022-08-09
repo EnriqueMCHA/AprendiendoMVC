@@ -3,6 +3,7 @@
 class Consulta extends Controller{
 
     function __construct(){
+
         parent::__construct();
         $this->view->peliculas = [];
         $this->view->pelicula = [];
@@ -44,8 +45,8 @@ class Consulta extends Controller{
 
         session_unset();
         session_destroy();
-        
-        if($this->model->update($datos)){
+
+        if ($this->model->update($datos)) {
 
             $pelicula = new Pelicula();
             $pelicula->nombre = $datos['nombre'];
@@ -54,7 +55,7 @@ class Consulta extends Controller{
 
             $mensaje = 'Película actualizada correctamente! ✔';
             $error = false;
-        } else{
+        } else {
 
             $mensaje = "No fue posible la actualización de la película ❌";
             $error = true;
@@ -70,12 +71,11 @@ class Consulta extends Controller{
 
         $idPelicula = $id[0];
 
-        if($this->model->delete($idPelicula)){
+        if ($this->model->delete($idPelicula)) {
 
             $mensaje = 'Película eliminada correctamente! ✔';
             $ok = true;
-
-        } else{
+        } else {
 
             $mensaje = "No fue posible la eliminación de la película ❌";
             $ok = false;
@@ -93,6 +93,3 @@ class Consulta extends Controller{
         echo json_encode($json);
     }
 }
-
-
-?>

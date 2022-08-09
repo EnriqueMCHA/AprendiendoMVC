@@ -17,11 +17,11 @@ class ConsultaModel extends Model{
 
             // while ($columna = $consulta->fetch()) {
 
-                // $pelicula = new Pelicula();
-                // $pelicula->id = $columna['pelicula_id'];
-                // $pelicula->nombre = $columna['nombre'];
-                // $pelicula->genero = $columna['genero'];
-                // $pelicula->calidad = $columna['calidad'];
+            // $pelicula = new Pelicula();
+            // $pelicula->id = $columna['pelicula_id'];
+            // $pelicula->nombre = $columna['nombre'];
+            // $pelicula->genero = $columna['genero'];
+            // $pelicula->calidad = $columna['calidad'];
 
             //     array_push($peliculas, $pelicula);
             // }
@@ -40,7 +40,6 @@ class ConsultaModel extends Model{
             }
 
             return $peliculas;
-
         } catch (PDOException $error) {
 
             return [];
@@ -65,7 +64,7 @@ class ConsultaModel extends Model{
             //     $pelicula->calidad = $columna['calidad'];
             // }
 
-            foreach($consulta as $llave){
+            foreach ($consulta as $llave) {
 
                 $pelicula->id = $llave['pelicula_id'];
                 $pelicula->nombre = $llave['nombre'];
@@ -74,7 +73,6 @@ class ConsultaModel extends Model{
             }
 
             return $pelicula;
-
         } catch (PDOException $error) {
 
             return [];
@@ -94,7 +92,6 @@ class ConsultaModel extends Model{
             ]);
 
             return true;
-
         } catch (PDOException $error) {
 
             return false;
@@ -110,12 +107,9 @@ class ConsultaModel extends Model{
             $consulta->execute(['id' => $id]);
 
             return true;
-
         } catch (PDOException $error) {
 
             return false;
         }
     }
 }
-
-?>

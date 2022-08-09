@@ -3,6 +3,7 @@
 class Nuevo extends Controller{
 
     function __construct(){
+
         parent::__construct();
         $this->view->mensaje = '';
         $this->view->error = false;
@@ -38,7 +39,7 @@ class Nuevo extends Controller{
             $this->view->mensaje = $mensaje;
             $this->view->error = $error;
             $this->render();
-        } else{
+        } else {
 
             $this->view->mensaje = 'El campo de la película no puede ir vacio 🙄';
             $this->view->error = true;
@@ -46,5 +47,3 @@ class Nuevo extends Controller{
         }
     }
 }
-
-?>
